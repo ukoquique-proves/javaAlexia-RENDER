@@ -37,6 +37,7 @@ mvn spring-boot:run
 - Cuenta de GitHub
 - Cuenta de Render (gratuita)
 - PostgreSQL en Render (incluido en free tier)
+- **Nota**: Free tier no incluye PostGIS extension (campos de geolocalización deshabilitados)
 
 ## ⚙️ Configuración Inicial
 
@@ -416,6 +417,21 @@ Este documento es la **guía definitiva** para el desarrollo de Alexia:
 - **Supabase en desarrollo**: Verifica que el JDBC URL incluya `prepareThreshold=0` (ver [SUPABASE.md](deployment/SUPABASE.md))
 - **Render en producción**: Usa la base de datos interna de Render, no Supabase (ver [DATABASE_STRATEGY.md](deployment/DATABASE_STRATEGY.md))
 
+### Error "type geography does not exist" en Render
+Este error ocurre porque el free tier de Render PostgreSQL no incluye la extensión PostGIS.
+
+**Solución aplicada**:
+- ✅ Campos de geolocalización (`location`) comentados en entidades `Business` y `Supplier`
+- ✅ Queries PostGIS comentadas en `BusinessRepository`
+- ✅ Código relacionado comentado en servicios con `// TODO: Re-enable when PostGIS extension is available`
+- ✅ Campos JSONB y array types también comentados temporalmente
+
+**Para re-habilitar** (cuando se tenga PostGIS disponible):
+1. Descomentar campos en entidades
+2. Descomentar queries en repositorios
+3. Descomentar código en servicios
+4. Probar localmente con `mvn clean compile -DskipTests`
+
 ### Error "prepared statement S_1 already exists"
 Este error ocurre con Supabase's connection pooler. **Solución**:
 ```bash
@@ -737,10 +753,10 @@ mvn clean install -DskipTests
 | 7 | ✅ | 2025-10-16 | Búsqueda de Negocios por Categoría |
 | **Deploy** | ✅ | **2025-10-19** | **Desplegado en Render con PostgreSQL** |
 | 8 | ✅ | 2025-10-21 | CRUD de Productos y Búsqueda | 
-| 9 | ✅ | 2025-10-21 | Búsqueda por Geolocalización (PostGIS) | 
+| 9 | ⚠️ | 2025-10-21 | Búsqueda por Geolocalización (PostGIS deshabilitado en Render) | 
 | 11 | ✅ | 2025-10-22 | Sistema de Captura de Leads (GDPR) | 
-| 11.5 | ✅ | 2025-10-22 | Feature: Encuentra Compradores Cercanos | 
-| 12 | ✅ | 2025-10-22 | Feature: Comparación de Precios de Proveedores | 
+| 11.5 | ⚠️ | 2025-10-22 | Feature: Encuentra Compradores Cercanos (PostGIS deshabilitado) | 
+| 12 | ⚠️ | 2025-10-22 | Feature: Comparación de Precios de Proveedores (JSONB deshabilitado) | 
 | 13 | ⏳ | Próximo | Búsqueda Híbrida (RAG) |
 
 **Progreso actual**: 7 pasos + Deploy = **Aplicación en producción** 🎉
