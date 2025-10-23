@@ -32,14 +32,18 @@ Make sellers say **"¡Wow, esto es increíble!"** by showing them:
 
 ## 📊 Current Status
 
-**Completed (Steps 1-7)**:
+**Completed (Steps 1-12)**:
 - ✅ Spring Boot + Vaadin dashboard
 - ✅ PostgreSQL database (Render)
 - ✅ Telegram bot with AI (Grok)
 - ✅ Basic business search
 - ✅ Deployed to production
+- ✅ Product catalog (Step 8)
+- ⚠️ Business management with geolocation (Step 9 - PostGIS disabled on Render)
+- ⚠️ Find buyers nearby (Step 11 - PostGIS disabled on Render)
+- ⚠️ Find suppliers & compare prices (Step 12 - JSONB disabled on Render)
 
-**Next**: Build the 6 "amazement features"
+**Next**: Step 13 - Lead Capture & Auto-Quotes
 
 ---
 
@@ -47,7 +51,9 @@ Make sellers say **"¡Wow, esto es increíble!"** by showing them:
 
 Basic platform for any retail business.
 
-### Step 8: Universal Product Catalog (1 week)
+### Step 8: Universal Product Catalog (1 week) ✅
+
+**Status**: Completed
 
 **For any business type**:
 - Plastic store: cups, plates, containers, bags
@@ -81,7 +87,9 @@ CREATE TABLE products (
 
 ---
 
-### Step 9: Universal Business Management (1 week)
+### Step 9: Universal Business Management (1 week) ⚠️
+
+**Status**: Partially completed - PostGIS features disabled on Render free tier
 
 **For any business type**:
 - Business type: retail, wholesale, service, manufacturing
@@ -120,7 +128,9 @@ CREATE TABLE products (
 
 Features that make sellers say "¡Wow!"
 
-### Step 11: Find Buyers Nearby (1.5 weeks) 🔥
+### Step 11: Find Buyers Nearby (1.5 weeks) ⚠️🔥
+
+**Status**: Implemented but disabled - PostGIS extension not available on Render free tier
 
 **Voice**: *"Alexia, quién necesita vasos plásticos cerca de mi tienda?"*
 
@@ -176,7 +186,9 @@ ORDER BY distance_m;
 
 ---
 
-### Step 12: Find Suppliers & Compare Prices (1.5 weeks) 🔥
+### Step 12: Find Suppliers & Compare Prices (1.5 weeks) ⚠️🔥
+
+**Status**: Implemented but JSONB fields disabled - Advanced PostgreSQL types not available on Render free tier
 
 **Voice**: *"Alexia, busca proveedores de vasos con mejor precio"*
 
@@ -218,7 +230,9 @@ CREATE TABLE suppliers (
 
 ---
 
-### Step 13: Lead Capture & Auto-Quotes (2 weeks) 🔥
+### Step 13: Lead Capture & Auto-Quotes (2 weeks) ✅🔥
+
+**Status**: Completed with GDPR/LGPD consent
 
 **Scenario**: Customer sends message
 
