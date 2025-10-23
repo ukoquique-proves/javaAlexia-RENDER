@@ -18,11 +18,7 @@ import java.util.Map;
  * Incluye geolocalización, horarios de atención y datos de contacto.
  */
 @Entity
-@Table(name = "businesses", indexes = {
-    @Index(name = "idx_businesses_category", columnList = "category"),
-    @Index(name = "idx_businesses_is_active", columnList = "is_active"),
-    @Index(name = "idx_businesses_name", columnList = "name")
-})
+@Table(name = "businesses")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
