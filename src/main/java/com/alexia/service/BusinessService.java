@@ -204,23 +204,24 @@ public class BusinessService {
         return message.toString();
     }
     
-    /**
-     * Establece las categorías para un negocio.
-     *
-     * @param business Negocio
-     * @param categories Array de categorías
-     */
-    public void setBusinessCategories(Business business, String[] categories) {
-        business.setCategories(categories);
-    }
-    
-    /**
-     * Obtiene las categorías de un negocio.
-     *
-     * @param business Negocio
-     * @return Array de categorías
-     */
-    public String[] getBusinessCategories(Business business) {
-        return business.getCategories();
-    }
+    // TODO: Re-enable when categories field is restored
+    // /**
+    //  * Establece las categorías para un negocio.
+    //  *
+    //  * @param business Negocio
+    //  * @param categories Array de categorías
+    //  */
+    // public void setBusinessCategories(Business business, String[] categories) {
+    //     business.setCategories(categories);
+    // }
+    // 
+    // /**
+    //  * Obtiene las categorías de un negocio.
+    //  *
+    //  * @param business Negocio
+    //  * @return Array de categorías
+    //  */
+    // public String[] getBusinessCategories(Business business) {
+    //     return business.getCategories();
+    // }
 }
