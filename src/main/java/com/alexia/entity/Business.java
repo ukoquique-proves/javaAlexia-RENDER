@@ -41,8 +41,8 @@ public class Business {
     @Column(length = 100)
     private String category;
 
-    @Column(name = "categories", columnDefinition = "TEXT[]")
-    private String[] categories; // Array of categories for better matching
+    // @Column(name = "categories", columnDefinition = "TEXT[]")
+    // private String[] categories; // Array of categories for better matching
 
     @Size(max = 500, message = "La dirección no puede exceder 500 caracteres")
     @Column(length = 500)
@@ -56,16 +56,16 @@ public class Business {
     private Boolean isActive = true;
 
     // Step 9: Geolocation and enhanced fields
-    @Column(name = "location", columnDefinition = "geography(Point, 4326)")
-    @org.hibernate.annotations.ColumnTransformer(
-        read = "ST_AsText(location)",
-        write = "ST_GeomFromText(?, 4326)::geography"
-    )
-    private String location; // Stored as WKT: "POINT(longitude latitude)" - can be null
+    // @Column(name = "location", columnDefinition = "geography(Point, 4326)")
+    // @org.hibernate.annotations.ColumnTransformer(
+    //     read = "ST_AsText(location)",
+    //     write = "ST_GeomFromText(?, 4326)::geography"
+    // )
+    // private String location; // Stored as WKT: "POINT(longitude latitude)" - can be null
 
-    @Column(name = "business_hours", columnDefinition = "jsonb")
-    @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Object> businessHours;
+    // @Column(name = "business_hours", columnDefinition = "jsonb")
+    // @JdbcTypeCode(SqlTypes.JSON)
+    // private Map<String, Object> businessHours;
 
     @Column(name = "google_place_id", length = 255, unique = true)
     private String googlePlaceId;
