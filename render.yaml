@@ -1,0 +1,34 @@
+# render.yaml - Simplified and robust configuration for Render
+services:
+  - type: web
+    name: alexia
+    env: docker
+    region: oregon
+    plan: free
+
+    # Health check to ensure the application is running correctly
+    healthCheckPath: /actuator/health
+
+    # Auto-deploy on pushes to the main branch
+    autoDeploy: true
+
+    # Environment variables to be set in the Render dashboard
+    # This approach is more secure and standard across platforms
+    envVars:
+      # Standard database credentials
+      - key: DATABASE_URL       # e.g., jdbc:postgresql://host/db
+        sync: false
+      - key: DATABASE_USER
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+
+      # Telegram Bot Credentials
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_BOT_USERNAME
+        sync: false
+
+      # Grok AI Credentials
+      - key: GROK_API_KEY
+        sync: false

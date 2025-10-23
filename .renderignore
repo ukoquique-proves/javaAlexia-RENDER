@@ -1,0 +1,43 @@
+# .renderignore
+# Archivos y carpetas que no deben desplegarse en Render
+
+# Archivos de entorno local
+.env
+.env.local
+*.env
+
+# Configuración local
+application-local.properties
+application-dev.properties
+
+# Documentación y archivos de desarrollo
+docs/
+docs_viejos/
+*.md
+!README.md
+
+# Archivos de IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Archivos temporales
+tmp/
+temp/
+*.tmp
+
+# Node modules (si los hay)
+node_modules/
+
+# Archivos de prueba
+src/test/
