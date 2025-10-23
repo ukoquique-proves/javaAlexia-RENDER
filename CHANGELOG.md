@@ -4,6 +4,32 @@ Registro de cambios y progreso del desarrollo incremental de Alexia.
 
 ---
 
+## [2025-10-23] - Deployment Stability & Documentation Alignment 🚀
+
+### ✅ Critical Deployment Fixes
+
+- **PostGIS Dependency Resolution**: Solved critical deployment failures on Render's free tier by commenting out all code related to PostgreSQL's PostGIS extension, which is not available.
+  - **Entities**: Commented out `location` (`geography` type) and `business_hours` (`jsonb` type) fields in `Business.java` and `Supplier.java`.
+  - **Repository**: Commented out all native SQL queries using PostGIS functions (`ST_DWithin`, `ST_Distance`) in `BusinessRepository.java`.
+  - **Services**: Commented out all code referencing the disabled fields in `BusinessService`, `GeolocationService`, `SearchService`, `SupplierService`, and `RagSearchService`.
+  - **Tests**: Disabled tests in `BusinessServiceTest` that depended on the removed fields.
+- **Configuration Warnings**: Addressed Hibernate warnings for a cleaner startup log.
+  - Removed explicit `hibernate.dialect` property, as it's auto-detected.
+  - Set `spring.jpa.open-in-view=false` to prevent potential performance issues and warnings.
+- **Local Compilation**: Integrated a local compilation step (`mvn clean compile -DskipTests`) into the workflow to catch errors before pushing to production.
+
+### 📝 Documentation Overhaul
+
+- **Updated All Deployment Guides**: Aligned `README.md`, `plan/PLAN.md`, and all files in the `deployment/` directory to reflect the PostGIS limitations and the workarounds applied.
+- **Troubleshooting Sections**: Added detailed explanations for the `geography type does not exist` error and updated checklists to include verifying PostGIS availability.
+- **Feature Status**: Updated `README.md` and `plan/PLAN.md` to mark PostGIS-dependent features (like geolocation search) as `⚠️ Temporarily Disabled`.
+
+### 🤖 Telegram Bot Stability
+
+- **Graceful Shutdown**: Implemented a `destroyMethod` on the `TelegramBotsApi` bean to ensure the bot session is closed properly when the application shuts down. This is a preventative measure against the `[409] Conflict` error during redeployments.
+
+---
+
 ## [2025-10-22] - Retrieval Augmented Generation (RAG) Search Strategy (Step 13) 🔍
 
 ### 🔍 Intelligent Business Search with Source Citation
