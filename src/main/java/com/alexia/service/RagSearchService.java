@@ -53,11 +53,12 @@ public class RagSearchService {
                 response.append(String.format("%d. %s", count++, business.getName()));
                 
                 // Add distance if available
-                if (business.getLocation() != null) {
-                    // In a real implementation, we would calculate the distance
-                    // For now, we'll just add a placeholder
-                    response.append(" (distancia)");
-                }
+                // TODO: Re-enable when location field is restored
+                // if (business.getLocation() != null) {
+                //     // In a real implementation, we would calculate the distance
+                //     // For now, we'll just add a placeholder
+                //     response.append(" (distancia)");
+                // }
                 
                 response.append("\n");
                 

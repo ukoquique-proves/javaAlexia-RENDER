@@ -40,8 +40,9 @@ public class BusinessValidator {
         validateWhatsApp(business.getWhatsapp());
         validateInstagram(business.getInstagram());
         validateRating(business.getRating());
-        validateBusinessHours(business.getBusinessHours());
-        validateLocation(business.getLocation());
+        // TODO: Re-enable when complex fields are restored
+        // validateBusinessHours(business.getBusinessHours());
+        // validateLocation(business.getLocation());
     }
 
     /**

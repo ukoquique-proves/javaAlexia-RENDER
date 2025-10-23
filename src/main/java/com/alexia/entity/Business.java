@@ -142,17 +142,18 @@ public class Business {
         return isActive != null && isActive;
     }
     
-    /**
-     * Obtiene las categorías del negocio.
-     */
-    public String[] getCategories() {
-        return categories;
-    }
-    
-    /**
-     * Establece las categorías del negocio.
-     */
-    public void setCategories(String[] categories) {
-        this.categories = categories;
-    }
+    // TODO: Re-enable when categories field is restored
+    // /**
+    //  * Obtiene las categorías del negocio.
+    //  */
+    // public String[] getCategories() {
+    //     return categories;
+    // }
+    // 
+    // /**
+    //  * Establece las categorías del negocio.
+    //  */
+    // public void setCategories(String[] categories) {
+    //     this.categories = categories;
+    // }
 }
