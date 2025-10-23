@@ -109,8 +109,23 @@ Both approaches work because Spring Boot's auto-configuration recognizes both pa
 
 ## Important Notes
 
-### ⚠️ Render Free Tier Limitation
+### ⚠️ Render Free Tier Limitations
+
+**Network Restrictions:**
 Render's free tier **blocks external database connections**. You cannot use Supabase in production on Render free tier. You must use Render's internal PostgreSQL.
+
+**PostgreSQL Extensions:**
+Render's free PostgreSQL tier **does not include PostGIS extension**. Entity fields using `geography`, `geometry`, or PostGIS functions will cause schema creation errors:
+```
+ERROR: type "geography" does not exist
+```
+
+**Advanced Types:**
+Some advanced PostgreSQL types may not be available on free tier:
+- `jsonb` - May require commenting out
+- Array types (`TEXT[]`) - May require commenting out
+
+**Solution:** Comment out these fields in entities, repositories, and services. Mark with `// TODO: Re-enable when PostGIS/extensions are available`.
 
 ### ✅ Supabase Connection Pooler
 When using Supabase in development:

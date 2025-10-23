@@ -34,6 +34,26 @@ Deploying a Vaadin Spring Boot application can be tricky. Here are the most comm
 
 **Important**: This limitation only affects **production**. You can (and should) use Supabase or any external PostgreSQL for local development.
 
+### 4. PostgreSQL Extensions (PostGIS) Not Available ❌
+
+- **Problem**: Schema creation fails with `ERROR: type "geography" does not exist` or similar PostGIS-related errors.
+- **Root Cause**: Render's free PostgreSQL tier does not include PostGIS extension. Entity fields using `geography`, `geometry`, or PostGIS functions will fail.
+- **Solution**: 
+  - Comment out PostGIS-dependent fields in entities (e.g., `@Column(columnDefinition = "geography(Point, 4326)")`)
+  - Comment out repository methods using PostGIS functions (`ST_DWithin`, `ST_Distance`, etc.)
+  - Comment out service code referencing these fields
+  - Mark all with `// TODO: Re-enable when PostGIS extension is available`
+- **Alternative**: Use standard PostgreSQL types (e.g., separate `latitude` and `longitude` DOUBLE columns) or upgrade to a paid tier with PostGIS support.
+
+### 5. Advanced PostgreSQL Types (JSONB, Arrays) ❌
+
+- **Problem**: Schema creation fails with `ERROR: type "jsonb" does not exist` or array type errors.
+- **Root Cause**: Some PostgreSQL features may not be available or configured on free tiers.
+- **Solution**: 
+  - Temporarily comment out fields using `@JdbcTypeCode(SqlTypes.JSON)` or array types
+  - Use standard types (VARCHAR, TEXT) as fallback
+  - Re-enable when upgrading to a tier with full PostgreSQL support
+
 ## Development vs Production Database Strategy
 
 This project uses **different databases** for development and production environments:
@@ -87,3 +107,8 @@ This project uses **different databases** for development and production environ
 - [ ] For free tiers, use the platform's internal database (Render PostgreSQL).
 - [ ] Development can use any PostgreSQL (Supabase, local, Docker).
 - [ ] Test the production Docker image locally before deploying.
+- [ ] Comment out PostGIS-dependent fields and queries if PostGIS extension is not available.
+- [ ] Comment out JSONB and array type fields if they cause schema creation errors.
+- [ ] Remove explicit `hibernate.dialect` setting (auto-detected by Hibernate).
+- [ ] Set `spring.jpa.open-in-view=false` to avoid lazy loading warnings.
+- [ ] Test local compilation with `mvn clean compile -DskipTests` before pushing.

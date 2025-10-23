@@ -87,6 +87,9 @@ Render will build the Docker image and deploy your application. This may take 5-
 - **Incorrect Environment Variables**: Ensure `DATABASE_URL`, `DATABASE_USER`, and `DATABASE_PASSWORD` are set correctly.
 - **Wrong JDBC Format**: The URL must start with `jdbc:postgresql://`.
 - **Vaadin Production Mode**: The `pom.xml` must be configured to build the Vaadin frontend for production. Without this, the app will crash.
+- **PostGIS Extension Missing**: Free tier PostgreSQL doesn't include PostGIS. Schema creation fails with `ERROR: type "geography" does not exist`. Comment out all PostGIS-dependent fields, repository queries, and service code.
+- **JSONB/Array Types**: Some advanced PostgreSQL types may not be available. Comment out fields using `@JdbcTypeCode(SqlTypes.JSON)` or array types if schema creation fails.
+- **Compilation Errors**: Always test locally with `mvn clean compile -DskipTests` before pushing to catch compilation errors early.
 
 ---
 

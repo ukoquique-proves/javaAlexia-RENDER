@@ -68,6 +68,18 @@ git push origin main
 
 ---
 
+## ⚠️ Known Limitations
+
+**Render Free Tier PostgreSQL:**
+- ❌ No PostGIS extension (geography/geometry types not available)
+- ❌ Some advanced types may not work (jsonb, arrays)
+- ✅ Solution: Comment out affected fields with TODO markers
+
+**Supabase Development:**
+- ✅ Full PostgreSQL features available
+- ✅ PostGIS extension available
+- ⚠️ Use port 6543 with `prepareThreshold=0`
+
 ## ✅ Current Status
 
 - ✅ Development environment working with Supabase
@@ -75,6 +87,7 @@ git push origin main
 - ✅ Clear separation of concerns
 - ✅ No hardcoded credentials
 - ✅ Proper HikariCP configuration for both environments
+- ✅ PostGIS fields commented out for Render compatibility
 - ✅ Documentation complete
 
 ---
