@@ -22,9 +22,10 @@ public class Supplier {
 
     private String category;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private Map<String, Object> products;
+    // TODO: Re-enable when jsonb is available
+    // @JdbcTypeCode(SqlTypes.JSON)
+    // @Column(columnDefinition = "jsonb")
+    // private Map<String, Object> products;
 
     private Integer deliveryTimeDays;
 
@@ -34,8 +35,9 @@ public class Supplier {
 
     private String website;
 
-    @Column(columnDefinition = "geography(Point, 4326)")
-    private String location;
+    // TODO: Re-enable when PostGIS extension is available
+    // @Column(columnDefinition = "geography(Point, 4326)")
+    // private String location;
 
     private BigDecimal rating;
 
