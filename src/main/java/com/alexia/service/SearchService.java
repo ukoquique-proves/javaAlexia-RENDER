@@ -73,12 +73,13 @@ public class SearchService {
     private List<Business> searchInternalDatabase(String query, Double latitude, Double longitude, Integer radiusMeters) {
         log.debug("Searching internal database for query: '{}'", query);
 
-        if (latitude != null && longitude != null && radiusMeters != null) {
-            return businessRepository.findNearbyWithCategory(query, longitude, latitude, radiusMeters);
-        } else {
+        // TODO: Re-enable when PostGIS extension is available
+        // if (latitude != null && longitude != null && radiusMeters != null) {
+        //     return businessRepository.findNearbyWithCategory(query, longitude, latitude, radiusMeters);
+        // } else {
             // Simple category search
             return businessRepository.findByCategoryContainingIgnoreCase(query);
-        }
+        // }
     }
     
     /**

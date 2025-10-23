@@ -36,10 +36,11 @@ public class SupplierService {
     }
 
     private BigDecimal getPriceForProduct(Supplier supplier, String productName) {
-        Object price = supplier.getProducts().get(productName);
-        if (price instanceof Number) {
-            return new BigDecimal(price.toString());
-        }
+        // TODO: Re-enable when products field is restored
+        // Object price = supplier.getProducts().get(productName);
+        // if (price instanceof Number) {
+        //     return new BigDecimal(price.toString());
+        // }
         return BigDecimal.ZERO;
     }
 }

@@ -45,15 +45,19 @@ public class GeolocationService {
         log.info("Buscando consumidores de productos plásticos cercanos - longitud={}, latitud={}, radio={}m", 
                 longitude, latitude, radiusMeters);
         
-        // Primero buscar por categorías específicas
-        List<Business> businesses = businessRepository.findByCategoryNearby(
-            String.join(",", PLASTIC_PRODUCT_CONSUMERS), longitude, latitude, radiusMeters);
+        // TODO: Re-enable when PostGIS extension is available
+        // // Primero buscar por categorías específicas
+        // List<Business> businesses = businessRepository.findByCategoryNearby(
+        //     String.join(",", PLASTIC_PRODUCT_CONSUMERS), longitude, latitude, radiusMeters);
+        // 
+        // // Si no hay suficientes resultados, buscar por proximidad
+        // if (businesses.size() < 5) {
+        //     log.info("No se encontraron suficientes negocios por categoría, buscando por proximidad");
+        //     businesses = businessRepository.findNearby(longitude, latitude, radiusMeters);
+        // }
         
-        // Si no hay suficientes resultados, buscar por proximidad
-        if (businesses.size() < 5) {
-            log.info("No se encontraron suficientes negocios por categoría, buscando por proximidad");
-            businesses = businessRepository.findNearby(longitude, latitude, radiusMeters);
-        }
+        log.info("Geolocation search temporarily disabled - returning empty list");
+        List<Business> businesses = List.of();
         
         log.info("Se encontraron {} negocios cercanos", businesses.size());
         return businesses;
@@ -72,8 +76,12 @@ public class GeolocationService {
         log.info("Buscando negocios cercanos por categoría - categoría={}, longitud={}, latitud={}, radio={}m", 
                 category, longitude, latitude, radiusMeters);
         
-        List<Business> businesses = businessRepository.findByCategoryNearby(
-            category, longitude, latitude, radiusMeters);
+        // TODO: Re-enable when PostGIS extension is available
+        // List<Business> businesses = businessRepository.findByCategoryNearby(
+        //     category, longitude, latitude, radiusMeters);
+        
+        log.info("Geolocation search temporarily disabled - returning empty list");
+        List<Business> businesses = List.of();
         
         log.info("Se encontraron {} negocios de la categoría '{}' cercanos", businesses.size(), category);
         return businesses;
